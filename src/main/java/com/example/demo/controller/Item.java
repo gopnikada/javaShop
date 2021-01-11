@@ -3,6 +3,8 @@ package com.example.demo.controller;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.awt.event.ItemEvent;
+
 public class Item {
     private int id;
     private String name;
@@ -16,7 +18,6 @@ public class Item {
 
     public Item(String json) throws JSONException {
         JSONObject obj = new JSONObject(json);
-        this.id = 20;
         this.name = obj.getString("name");
         this.countAvailable = obj.getInt(String.valueOf(countAvailable));
     }
@@ -43,5 +44,14 @@ public class Item {
 
     public void setCountAvailable(int countAvailable) {
         this.countAvailable = countAvailable;
+    }
+
+    @Override
+    public String toString() {
+        return "Item{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", countAvailable=" + countAvailable +
+                '}';
     }
 }

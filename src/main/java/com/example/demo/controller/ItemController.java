@@ -4,20 +4,17 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("items")
-public class MessageController {
-
-
-    private List<Item> items = new ArrayList<Item>(){{
-        add(new Item(1, "Samsung A5", 3));
-        add(new Item(2, "HTC XC", 2));
-        add(new Item(3, "BlackBerry", 0));
+public class ItemController {
+    public static List<Item> items = new ArrayList<Item>(){{
+        add(new Item(1, "Samsung A5", 7));
+        add(new Item(2, "HTC XC", 8));
+        add(new Item(3, "BlackBerry", 5));
     }};
-
-    private int idCounter = items.size();
-
+    public static int getIdCounter=items.size();
 
     @GetMapping
     public List<Item> list(){
@@ -29,14 +26,21 @@ public class MessageController {
         return getItem(id);
     }
 
-
-
     @PostMapping
-    public List<Item> create(@RequestBody Item item) {
-        item.setId(++idCounter);
+    public List<Item> addOne(@RequestBody Item item) {
+        item.setId(++getIdCounter);
+        System.out.println(item.toString());
         items.add(item);
         return items;
     }
+    @PostMapping("buy")
+    public Basket addToBasket(@RequestBody Basket basket) {
+
+        System.out.println(basket.toString());
+        return basket;
+    }
+
+
 //    @PutMapping
 //    public Map<String, String> update(@PathVariable String id, @RequestBody Map<String, String> message) {
 //        Map<String, String> messageFromDb = getMessage(id);
