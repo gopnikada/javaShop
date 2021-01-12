@@ -13,16 +13,11 @@ public class Order {
     private int id;
     private int count;
 
-
-
-
     public Order(int id, int count, List<Integer> list) {
         this.id = id;
         this.count = count;
 
     }
-
-
 
     public int getId() {
         return id;

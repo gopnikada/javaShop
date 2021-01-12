@@ -14,6 +14,8 @@ public class ItemController {
         add(new Item(3, "BlackBerry", 5));
     }};
     public static int getIdCounter=items.size();
+    Basket basket = new Basket(new ArrayList<Order>());
+
 
     @GetMapping
     public List<Item> list(){
@@ -37,22 +39,19 @@ public class ItemController {
         System.out.println(order.toString());
         String output = "";
 
+
+
         for(int i = 0; i < items.size(); i++){
-            if(order.getId() == items.get(i).getId()){
-                output = order.toString() +"has id";
+            if(order.getId() == items.get(i).getId() && order.getCount()<=items.get(i).getCountAvailable()){
+                output = order.toString() +" =>> has id and count";
+                basket.setOrders(order);
+                System.out.println(basket.getOrders());
                 break;
             }else{
-                output = "not found";
+                output = "not found or no such count";
             }
         }
-        for(int i = 0; i < items.size(); i++){
-            if(order.getCount()<=items.get(i).getCountAvailable()){
-                output+=order.toString() + "has count";
-                break;
-            }else{
-                output+="not has count";
-            }
-        }
+
         return output;
     }
 //    @PostMapping("buyMul")
