@@ -19,7 +19,7 @@ public class Item {
     public Item(String json) throws JSONException {
         JSONObject obj = new JSONObject(json);
         this.name = obj.getString("name");
-        this.countAvailable = obj.getInt(String.valueOf(countAvailable));
+        this.countAvailable = obj.getInt("countAvailable");
     }
 
     public int getId() {

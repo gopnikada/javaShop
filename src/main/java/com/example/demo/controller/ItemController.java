@@ -4,7 +4,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("items")
@@ -34,11 +33,33 @@ public class ItemController {
         return items;
     }
     @PostMapping("buy")
-    public Basket addToBasket(@RequestBody Basket basket) {
+    public String addToBasket(@RequestBody Order order) {
+        System.out.println(order.toString());
+        String output = "";
 
-        System.out.println(basket.toString());
-        return basket;
+        for(int i = 0; i < items.size(); i++){
+            if(order.getId() == items.get(i).getId()){
+                output = order.toString() +"has id";
+                break;
+            }else{
+                output = "not found";
+            }
+        }
+        for(int i = 0; i < items.size(); i++){
+            if(order.getCount()<=items.get(i).getCountAvailable()){
+                output+=order.toString() + "has count";
+                break;
+            }else{
+                output+="not has count";
+            }
+        }
+        return output;
     }
+//    @PostMapping("buyMul")
+//    public BusketMul addMul(@RequestBody BusketMul basketMul){
+//        System.out.println(basketMul.toString());
+//        return basketMul;
+//    }
 
 
 //    @PutMapping
