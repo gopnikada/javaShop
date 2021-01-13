@@ -45,8 +45,9 @@ public class Order {
 
     @Override
     public String toString() {
-        return "Order with id " + id +
-                " in count " + count +
-                " has been purchased";
+        return "{" +
+                "id=" + id +
+                ", count=" + count +
+                '}';
     }
 }

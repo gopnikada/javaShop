@@ -39,8 +39,6 @@ public class ItemController {
         System.out.println(order.toString());
         String output = "";
 
-
-
         for(int i = 0; i < items.size(); i++){
             if(order.getId() == items.get(i).getId() && order.getCount()<=items.get(i).getCountAvailable()){
                 output = order.toString() +" =>> has id and count";
