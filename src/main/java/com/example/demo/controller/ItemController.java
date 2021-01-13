@@ -41,7 +41,12 @@ public class ItemController {
 
         for(int i = 0; i < items.size(); i++){
             if(order.getId() == items.get(i).getId() && order.getCount()<=items.get(i).getCountAvailable()){
+                Item item = getItem(String.valueOf(order.getId()));
+                System.out.println("Item to add id: " + item.getId());
+                item.setCountAvailable(item.getCountAvailable() - order.getCount());
+                System.out.println("Rest item count: " + item.getCountAvailable());
                 output = order.toString() +" =>> has id and count";
+
                 basket.setOrders(order);
                 System.out.println(basket.getOrders());
                 break;
