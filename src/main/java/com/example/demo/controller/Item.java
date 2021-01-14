@@ -9,17 +9,30 @@ public class Item {
     private int id;
     private String name;
     private int countAvailable;
+    private String link;
+
+    public String getLink() {
+        return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
+    }
 
     public Item(int id, String name, int countAvailable) {
         this.id = id;
         this.name = name;
         this.countAvailable = countAvailable;
+        this.link = "http://127.0.0.1:8080/items/" + id;
+
     }
 
     public Item(String json) throws JSONException {
         JSONObject obj = new JSONObject(json);
+
         this.name = obj.getString("name");
         this.countAvailable = obj.getInt("countAvailable");
+
     }
 
     public int getId() {

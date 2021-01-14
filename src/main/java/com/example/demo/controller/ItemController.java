@@ -13,7 +13,7 @@ public class ItemController {
         add(new Item(2, "HTC XC", 8));
         add(new Item(3, "BlackBerry", 5));
     }};
-    public static int getIdCounter=items.size();
+    public static int getIdCounter = items.size();
     Basket basket = new Basket(new ArrayList<Order>());
 
 
@@ -24,6 +24,7 @@ public class ItemController {
 
     @GetMapping("{id}")
     public Item getOne(@PathVariable String id) {
+
         return getItem(id);
     }
 
