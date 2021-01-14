@@ -44,22 +44,24 @@ public class ItemController {
         for(int i = 0; i < items.size(); i++){
             if(order.getId() == items.get(i).getId() && order.getCount()<=items.get(i).getCountAvailable()){
                 Item item = getItem(String.valueOf(order.getId()));
-                //System.out.println("Item to add id: " + item.getId());
                 item.setCountAvailable(item.getCountAvailable() - order.getCount());
-                //System.out.println("Rest item count: " + item.getCountAvailable());
                 output = order.toString() +" =>> has id and count";
-                if(basket.getOrders().size()==0){
+                if(basket.getOrders().size()<3 ){// ||
                     basket.setOrders(order);
+                }else {//ints
+                    if(order.getId() == matchedOrder(order.getId()).getId()){
+                        System.out.println("ALready");
+                    }else{
+                        basket.setOrders(order);
+                    }
                 }
 
-                addOrder(order);
 
 
-//                if(order.getId() == getOrder(String.valueOf(order.getId())).getId()) {
-//                    basket.setOrders(order);
-//                }else{
-//                    System.out.println("this order already in basket");
-//                }
+
+
+
+
 
                 System.out.println("---------------------------------------------------");
 
@@ -100,23 +102,14 @@ public class ItemController {
                 .findFirst()
                 .orElse(null);
     }
-
-    private Order getOrder(String id) {
+    private Order matchedOrder(int id) {
         return basket.getOrders().stream()
-                .filter(t -> id==String.valueOf(t.getId()))
+                .filter(o -> id == o.getId())
                 .findFirst()
                 .orElse(null);
     }
 
-    private void addOrder(Order order) {
-        for (Order o : basket.getOrders()) {
-            if(order.getId() != o.getId()){
-                System.out.println("added");
-                basket.setOrders(o);
-            }else{
-                System.out.println("not unique");
-            }
-        }
 
-    }
+
+
 }
