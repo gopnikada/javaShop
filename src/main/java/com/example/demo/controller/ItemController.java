@@ -51,7 +51,7 @@ public class ItemController {
                 Item item = getItem(String.valueOf(order.getId()));
                 item.setCountAvailable(item.getCountAvailable() - order.getCount());
                 output = order.toString() +" =>> has id and count";
-                if(basket.getOrders().size()==0 ){// ||
+                if(basket.getOrders().size()==0 ){
                     basket.setOrders(order);
                 }else {
                     if((matchedOrder(order.getId()).isEmpty())){
@@ -59,17 +59,10 @@ public class ItemController {
                     }else{
                         Item editedItem = getItem(String.valueOf(order.getId()));
                         editedItem.setCountAvailable(editedItem.getCountAvailable()+1);
-//
                         editedItem.setCountAvailable(editedItem.getCountAvailable() - order.getCount());
-//                        System.out.println("Edited item: " + editedItem);
                         foundOrder(order.getId()).setCount(foundOrder(order.getId()).getCount()+order.getCount());
-                        System.out.println("Edited order: " + foundOrder(order.getId()));
                     }
                 }
-
-
-                System.out.println(basket.getOrders());
-               
                 break;
             }else{
                 output = "not found or no such count";
@@ -78,27 +71,7 @@ public class ItemController {
 
         return output;
     }
-//    @PostMapping("buyMul")
-//    public BusketMul addMul(@RequestBody BusketMul basketMul){
-//        System.out.println(basketMul.toString());
-//        return basketMul;
-//    }
 
-
-//    @PutMapping
-//    public Map<String, String> update(@PathVariable String id, @RequestBody Map<String, String> message) {
-//        Map<String, String> messageFromDb = getMessage(id);
-//        messageFromDb.putAll(message);
-//        messageFromDb.put("id", id);
-//        return messageFromDb;
-//    }
-//    @DeleteMapping("{id}")
-//    public void delete(@PathVariable String id){
-//        Map<String, String> message = getMessage(id);
-//        messages.remove(message);
-//    }
-//
-//
     private Item getItem(String id) {
         return items.stream()
                 .filter(t -> Integer.parseInt(id)==t.getId())
@@ -116,8 +89,4 @@ public class ItemController {
                 .findFirst()
                 .orElse(null);
     }
-
-
-
-
 }
