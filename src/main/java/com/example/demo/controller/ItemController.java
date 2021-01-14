@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("items")
@@ -46,15 +47,17 @@ public class ItemController {
                 Item item = getItem(String.valueOf(order.getId()));
                 item.setCountAvailable(item.getCountAvailable() - order.getCount());
                 output = order.toString() +" =>> has id and count";
-                if(basket.getOrders().size()<3 ){// ||
+                if(basket.getOrders().size()==0 ){// ||
                     basket.setOrders(order);
                 }else {//ints
-                    if(order.getId() == matchedOrder(order.getId()).getId()){
-                        System.out.println("ALready");
-                    }else{
+                    if((matchedOrder(order.getId()).isEmpty())){
+
                         basket.setOrders(order);
+                    }else{
+                        System.out.println("Already");
                     }
                 }
+
 
 
 
@@ -102,11 +105,10 @@ public class ItemController {
                 .findFirst()
                 .orElse(null);
     }
-    private Order matchedOrder(int id) {
+    private Optional<Order> matchedOrder(int id) {
         return basket.getOrders().stream()
                 .filter(o -> id == o.getId())
-                .findFirst()
-                .orElse(null);
+                .findFirst();
     }
 
 
