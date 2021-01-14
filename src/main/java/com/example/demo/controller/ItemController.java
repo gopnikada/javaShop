@@ -31,6 +31,7 @@ public class ItemController {
     @PostMapping
     public List<Item> addOne(@RequestBody Item item) {
         item.setId(++getIdCounter);
+        item.setLink("http://127.0.0.1:8080/items/" + item.getId());
         System.out.println(item.toString());
         items.add(item);
         return items;

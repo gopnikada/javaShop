@@ -23,16 +23,13 @@ public class Item {
         this.id = id;
         this.name = name;
         this.countAvailable = countAvailable;
-        this.link = "http://127.0.0.1:8080/items/" + id;
-
+        this.link = "http://127.0.0.1:8080/items/" + this.id;
     }
 
     public Item(String json) throws JSONException {
         JSONObject obj = new JSONObject(json);
-
         this.name = obj.getString("name");
         this.countAvailable = obj.getInt("countAvailable");
-
     }
 
     public int getId() {
@@ -65,6 +62,7 @@ public class Item {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", countAvailable=" + countAvailable +
+                ", link='" + link + '\'' +
                 '}';
     }
 }
