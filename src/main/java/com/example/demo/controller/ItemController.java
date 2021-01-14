@@ -49,23 +49,19 @@ public class ItemController {
                 output = order.toString() +" =>> has id and count";
                 if(basket.getOrders().size()==0 ){// ||
                     basket.setOrders(order);
-                }else {//ints
+                }else {
                     if((matchedOrder(order.getId()).isEmpty())){
-
                         basket.setOrders(order);
                     }else{
-                        System.out.println("Already");
+                        Item editedItem = getItem(String.valueOf(order.getId()));
+                        editedItem.setCountAvailable(editedItem.getCountAvailable()+1);
+//
+                        editedItem.setCountAvailable(editedItem.getCountAvailable() - order.getCount());
+//                        System.out.println("Edited item: " + editedItem);
+                        foundOrder(order.getId()).setCount(foundOrder(order.getId()).getCount()+order.getCount());
+                        System.out.println("Edited order: " + foundOrder(order.getId()));
                     }
                 }
-
-
-
-
-
-
-
-
-
                 System.out.println("---------------------------------------------------");
 
                 System.out.println(basket.getOrders());
@@ -109,6 +105,12 @@ public class ItemController {
         return basket.getOrders().stream()
                 .filter(o -> id == o.getId())
                 .findFirst();
+    }
+    private Order foundOrder(int id) {
+        return basket.getOrders().stream()
+                .filter(o -> id == o.getId())
+                .findFirst()
+                .orElse(null);
     }
 
 
