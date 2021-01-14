@@ -22,6 +22,10 @@ public class ItemController {
     public List<Item> list(){
         return items;
     }
+    @GetMapping("basket")
+    public List<Order> clientBasket(){
+        return basket.getOrders();
+    }
 
     @GetMapping("{id}")
     public Item getOne(@PathVariable String id) {
@@ -62,7 +66,7 @@ public class ItemController {
                         System.out.println("Edited order: " + foundOrder(order.getId()));
                     }
                 }
-                System.out.println("---------------------------------------------------");
+
 
                 System.out.println(basket.getOrders());
                
